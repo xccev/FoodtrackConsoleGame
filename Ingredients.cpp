@@ -1,6 +1,6 @@
 #include "Ingredients.hpp"
 
-IngredientStaticInfo::IngredientStaticInfo(const std::string& name,
+IngredientStaticInfo::IngredientStaticInfo(const std::string &name,
                                            float recommendedPrice,
                                            int efficiency)
     : name_(name), lastPrice_(recommendedPrice), efficiency_(efficiency) {}
@@ -20,11 +20,15 @@ IngredientInfo::IngredientInfo(Ingredient ingredient, int amount)
   setAmount(amount);
 }
 
-int IngredientInfo::addPieces(int amount) { return amount_ += amount; }
+float IngredientInfo::addPieces(float amount) {
+  amount_ += amount;
+  if (amount_ < 0) amount_ = 0;
+  return amount_;
+}
 
-int IngredientInfo::getAmount() const { return amount_; }
+float IngredientInfo::getAmount() const { return amount_; }
 
-void IngredientInfo::setAmount(int amount) {
+void IngredientInfo::setAmount(float amount) {
   if (amount < 0)
     amount_ = 0;
   else
